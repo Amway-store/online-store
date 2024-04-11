@@ -96,8 +96,18 @@ const Block = styled("div")`
   }
 
   p {
-    width: 25rem;
+    width: 25vw;
     font-size: 1.5rem;
+  }
+
+  @media (max-width: 990px) {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      width: 100%;
+      font-size: 1.2rem;
+    }
   }
 `;
 
@@ -113,7 +123,16 @@ const Block2 = styled("div")`
   }
 
   p {
-    width: 25rem;
+    width: 25vw;
     font-size: 1.5rem;
+  }
+
+  @media (max-width: 990px) {
+    display: flex;
+    flex-direction: column;
+    p {
+      width: 100%;
+      font-size: 1.2rem;
+    }
   }
 `;

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { MdOutlineClose } from "react-icons/md";
 import { selectItems, selectTotalPrice } from "../../store/Catalog.slice";
+import { Link } from "react-router-dom";
 
 export const Basket = () => {
   const product = useSelector(selectItems);
@@ -45,7 +46,14 @@ export const Basket = () => {
 
           <Block>
             <h3>Итого к оплате: {total} руб</h3>
-            <button>Оформить заказ</button>
+            <button>
+              <Link
+                style={{ color: "white", textDecoration: "none" }}
+                to="/order"
+              >
+                Оформить заказ
+              </Link>
+            </button>
           </Block>
         </ContainerChilde>
       )}
