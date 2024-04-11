@@ -11,32 +11,36 @@ export const Personal = () => {
         </Link>
       </Header>
       <Nav>
-        <Modal>
-          <h3>Регистрация</h3>
+        <div>
           <Block>
+            <h3>Регистрация</h3>
             <div>
               <p>Контактное лицо (ФИО):</p>
               <input />
             </div>
+
             <div>
               <p>Контактный телефон:</p>
               <input />
             </div>
+
             <div>
               <p>Email</p>
               <input />
             </div>
+
             <div>
               <p>Пароль:</p>
               <input />
             </div>
+
             <div>
               <p>Повторите пароль</p>
               <input />
             </div>
             <button>Зарегистрироваться</button>
           </Block>
-        </Modal>
+        </div>
       </Nav>
     </div>
   );
@@ -59,26 +63,22 @@ const Nav = styled("div")`
   background-color: #383636;
 `;
 
-const Modal = styled("div")`
+const Block = styled("form")`
   margin-top: 1rem;
-  width: 60vw;
-  height: 55vh;
+  width: 30vw;
   border-radius: 10px;
   padding: 1rem;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-`;
 
-const Block = styled("div")`
-  border: 1px solid gray;
-  padding: 1rem;
   div {
     display: flex;
+    justify-content: space-between;
     align-items: center;
   }
 
   p {
-    width: 10vw;
+    width: 15vw;
   }
 
   button {
@@ -88,5 +88,25 @@ const Block = styled("div")`
     border-radius: 5px;
     cursor: pointer;
     color: white;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 1000px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    p {
+      width: 100%;
+    }
+
+    input {
+      width: 20vw;
+    }
   }
 `;

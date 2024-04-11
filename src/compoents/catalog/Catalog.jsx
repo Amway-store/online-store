@@ -27,18 +27,27 @@ const Catalog = () => {
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem;
   background-color: #03cfd6;
   height: 100%;
+
+  @media (max-width: 910px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 445px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 const Cart = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 20vw;
   overflow: hidden;
 
   img {
@@ -68,6 +77,12 @@ const Cart = styled.div`
 
   &:hover button {
     opacity: 1;
+  }
+
+  @media (max-width: 620px) {
+    p {
+      font-size: 10px;
+    }
   }
 `;
 
