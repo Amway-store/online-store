@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { product } from "../../utils/data";
-import { addItem } from "../../store/Catalog.slice";
+import { product } from "../../../utils/data";
+import { addItem } from "../../../store/Catalog.slice";
 
 const Catalog = () => {
   const dispatch = useDispatch();

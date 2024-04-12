@@ -1,17 +1,18 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage } from "./compoents/home/Home";
+import { HomePage } from "./components/User/home/Home";
 import Layout from "./layout/Layout";
-import Catalog from "./compoents/catalog/Catalog";
-import { Delivery } from "./compoents/delivery/Delivery";
-import { Payment } from "./compoents/ payment/ Payment";
-import { Basket } from "./compoents/basket/Basket";
-import { Personal } from "./compoents/personal/Personal";
-import { Page1 } from "./compoents/categoty/Page1";
-import { Page2 } from "./compoents/categoty/Page2";
-import { Page3 } from "./compoents/categoty/Page3";
-import { Page4 } from "./compoents/categoty/Page4";
-import { Page5 } from "./compoents/categoty/Page5";
-import { Order } from "./compoents/order/Order";
+import Catalog from "./components/User/catalog/Catalog";
+import { Delivery } from "./components/User/delivery/Delivery";
+import { Payment } from "./components/User/ payment/ Payment";
+import { Basket } from "./components/User/basket/Basket";
+import { Personal } from "./components/User/personal/Personal";
+import { Page1 } from "./components/User/categoty/Page1";
+import { Page2 } from "./components/User/categoty/Page2";
+import { Page3 } from "./components/User/categoty/Page3";
+import { Page4 } from "./components/User/categoty/Page4";
+import { Page5 } from "./components/User/categoty/Page5";
+import { Order } from "./components/User/order/Order";
+import { AddProduct } from "./components/Admin/product/AddProduct";
 
 function App() {
   const router = [
@@ -59,6 +60,7 @@ function App() {
 
   return (
     <Routes>
+      <Route path="admin" element={<AddProduct />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
         {router.map((item, id) => (

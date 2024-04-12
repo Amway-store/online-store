@@ -4,7 +4,10 @@ import { CiSearch } from "react-icons/ci";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectTotalCount, selectTotalPrice } from "../../store/Catalog.slice";
+import {
+  selectTotalCount,
+  selectTotalPrice,
+} from "../../../store/Catalog.slice";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
 
