@@ -1,8 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Personal = () => {
+  const [showRegistrationFields, setShowRegistrationFields] = useState(true);
+  const [formData, setFormData] = useState({
+    name: "",
+    number: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const toggleRegistrationFields = () => {
+    setShowRegistrationFields(!showRegistrationFields);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log("Form Data:", formData);
+  };
+
   return (
     <div>
       <Header>
@@ -13,32 +39,73 @@ export const Personal = () => {
       <Nav>
         <div>
           <Block>
-            <h3>Регистрация</h3>
-            <div>
-              <p>Контактное лицо (ФИО):</p>
-              <input />
-            </div>
+            <h3 className="text-center mb-2 text-[1.2rem]">Регистрация</h3>
+            {showRegistrationFields && (
+              <>
+                <div>
+                  <p>Контактное лицо (ФИО):</p>
+                  <input
+                    name="name"
+                    value={formData.name}
+                    type="text"
+                    onChange={handleChange}
+                  />
+                </div>
 
-            <div>
-              <p>Контактный телефон:</p>
-              <input />
-            </div>
+                <div>
+                  <p>Контактный телефон:</p>
+                  <input
+                    name="number"
+                    type="number"
+                    value={formData.number}
+                    onChange={handleChange}
+                  />
+                </div>
+              </>
+            )}
 
             <div>
               <p>Email</p>
-              <input />
+              <input
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
 
             <div>
               <p>Пароль:</p>
-              <input />
+              <input
+                name="password"
+                value={formData.password}
+                type="password"
+                onChange={handleChange}
+              />
             </div>
 
-            <div>
-              <p>Повторите пароль</p>
-              <input />
+            {showRegistrationFields && (
+              <div>
+                <p>Повторите пароль</p>
+                <input
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  type="password"
+                  onChange={handleChange}
+                />
+              </div>
+            )}
+            <div className="flex justify-between">
+              <button className="mb-4 w-[7rem]" onClick={handleLogin}>
+                Войти
+              </button>
+              <p
+                className="text-[blue] w-[5rem] pl-[5.5rem] cursor-pointer"
+                onClick={toggleRegistrationFields}
+              >
+                {showRegistrationFields ? "Зарегистрироваться" : "Регистрация"}
+              </p>
             </div>
-            <button>Зарегистрироваться</button>
           </Block>
         </div>
       </Nav>
@@ -67,9 +134,19 @@ const Block = styled("form")`
   margin-top: 1rem;
   width: 30vw;
   border-radius: 10px;
-  padding: 1rem;
+  padding: 2rem;
   background-color: white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  input {
+    border: 1px solid black;
+    outline: none;
+    border-radius: 3px;
+    padding: 2px;
+  }
 
   div {
     display: flex;
@@ -95,16 +172,13 @@ const Block = styled("form")`
     display: flex;
     flex-direction: column;
     align-items: center;
-
     div {
       display: flex;
       flex-direction: column;
     }
-
     p {
       width: 100%;
     }
-
     input {
       width: 20vw;
     }
