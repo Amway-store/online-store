@@ -11,7 +11,7 @@ export const Personal = () => {
     e.preventDefault();
 
     if (value === "admin@gmail.com" && value2 === "admin") {
-      window.location.href = "/admin";
+      window.location.href = "/adminPage";
     } else if (value && value2) {
       window.location.href = "home";
     } else {
@@ -75,7 +75,7 @@ export const Personal = () => {
                 type="submit"
                 className="btn btn-success block mt-2 form-check w-100"
               >
-                Sign In
+                Войти
               </button>
             </form>
           </div>
