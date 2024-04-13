@@ -1,10 +1,18 @@
 import styled from "styled-components";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { product } from "../../../utils/data";
 import { addItem } from "../../../store/Catalog.slice";
+import { selectFilterValue } from "../../../store/Filter.slice";
 
 const Catalog = () => {
   const dispatch = useDispatch();
+  const filterValue = useSelector(selectFilterValue);
+
+  const filteredItems = product.filter(
+    (item) =>
+      item.title.toLowerCase().includes(filterValue.toLowerCase()) ||
+      item.description.toLowerCase().includes(filterValue.toLowerCase())
+  );
 
   const handleAddToCart = (item) => {
     dispatch(addItem(item));
@@ -12,7 +20,7 @@ const Catalog = () => {
 
   return (
     <Container>
-      {product.map((el) => (
+      {filteredItems.map((el) => (
         <Cart key={el.id}>
           <img src={el.image} alt="img" />
           <p>{el.title}</p>
@@ -30,7 +38,8 @@ const Container = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem;
-  background-color: #03cfd6;
+
+  background-color: #d1e9fe;
   height: 100%;
 
   @media (max-width: 910px) {
@@ -55,8 +64,9 @@ const Cart = styled.div`
   }
 
   p {
-    color: white;
+    color: #014572;
     font-weight: 600;
+    margin-top: 0.5rem;
   }
   &:hover p {
     color: black;

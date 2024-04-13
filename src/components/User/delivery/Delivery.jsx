@@ -18,17 +18,17 @@ export const Delivery = () => {
 };
 
 const Container = styled.div`
-  background-color: #03cfd6;
+  background-color: #d1e9fe;
   height: 100vh;
   padding: 1rem;
 
   h2 {
-    color: white;
+    color: #014572;
     font-size: 40px;
   }
 
   p {
-    color: white;
+    color: #014572;
     font-weight: 600;
   }
 
@@ -36,6 +36,6 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    color: white;
+    color: #014572;
   }
 `;

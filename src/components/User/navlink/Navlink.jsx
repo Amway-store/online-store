@@ -1,15 +1,12 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Navlink = () => {
   return (
     <div>
       <Block>
-        <LinkStyle to="pag1">Средства для стирки</LinkStyle>
-        <LinkStyle to="pag2">Средства для очистки поверхностей</LinkStyle>
-        <LinkStyle to="pag3">Средства для мытья посуды</LinkStyle>
-        <LinkStyle to="pag4">Дозаторы и аппликаторы</LinkStyle>
-        <LinkStyle to="pag5">Средства по уходу за детьми</LinkStyle>
+        Все товары в наличии! Мы работаем исключительно с оригинальными товарами
+        Амвей. Можете оставить заказ, мы свяжемся с Вами до 21.00. Если у вас
+        срочные вопросы, то можете сами позвонить +7 985 117 6025
       </Block>
     </div>
   );
@@ -21,15 +18,10 @@ const Block = styled("div")`
   justify-content: space-between;
   background-color: #813ffb;
   padding: 0 2rem 0 2rem;
-  height: 3rem;
+  height: 6rem;
+  color: white;
 
   @media (max-width: 890px) {
     display: none;
   }
-`;
-
-const LinkStyle = styled(Link)`
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
 `;

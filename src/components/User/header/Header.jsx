@@ -3,19 +3,27 @@ import { SlBasket } from "react-icons/sl";
 import { CiSearch } from "react-icons/ci";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectTotalCount,
   selectTotalPrice,
 } from "../../../store/Catalog.slice";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import { selectFilterValue, setFilterValue } from "../../../store/Filter.slice";
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const totalCount = useSelector(selectTotalCount);
   const totalPrice = useSelector(selectTotalPrice);
 
   const [openModal, setOpenModal] = useState(false);
+
+  const filterValue = useSelector(selectFilterValue);
+
+  const handleFilterChange = (e) => {
+    dispatch(setFilterValue(e.target.value));
+  };
   return (
     <StyledHeader>
       <Nav>
@@ -50,9 +58,20 @@ export const Header = () => {
         </div>
       </Nav>
       <Block>
-        <a href="/">Amway</a>
+        <LinkStyleHome to="/home">
+          <img
+            src="https://www.kz.amway.com/common/medias/logo-amway-white.png?context=bWFzdGVyfGltYWdlc3wxNDg2OXxpbWFnZS9wbmd8aW1hZ2VzL2hjOC9oZmMvOTIyMzQzMDk2MzIzMC5wbmd8NTk0NzdkNDk0ZjUzMGUwYzQ2MzFhNDNhNzkxMjI2ZWE2Y2M5MjQ1YWE3YjE4YmI1ZTdiZTE2NzY0ODIzOTdmMg&ccv=Qy1LQVotTw=="
+            alt="img"
+          />
+          <p>365</p>
+        </LinkStyleHome>
+
         <SearchBlock>
-          <input placeholder="Поиск" />
+          <input
+            placeholder="Поиск"
+            value={filterValue}
+            onChange={handleFilterChange}
+          />
           <CiSearch
             className="search-icon"
             size={25}
@@ -61,7 +80,7 @@ export const Header = () => {
           />
         </SearchBlock>
         <Basket>
-          <Link to="personal">
+          <Link to="/">
             <FaRegUser
               className="userStyle"
               size={30}
@@ -77,7 +96,7 @@ export const Header = () => {
             <p>{totalPrice} руб</p>
           </div>
         </Basket>
-        <Number>+996703874862</Number>
+        <Number>+7 985 117 6025</Number>
       </Block>
     </StyledHeader>
   );
@@ -85,10 +104,14 @@ export const Header = () => {
 
 const StyledHeader = styled("header")`
   padding: 0rem 5rem 0rem 5rem;
-  background-color: green;
+  background-color: #0a448b;
 
   @media (max-width: 660px) {
     padding: 0rem 2rem 0rem 2rem;
+  }
+
+  @media (max-width: 1150px) {
+    padding: 0rem 1rem 0rem 1rem;
   }
 `;
 
@@ -101,30 +124,48 @@ const Block = styled("div")`
 
   input {
     width: 38vw;
-    height: 6vh;
-    background-color: #48b448;
+    height: 5vh;
     border: none;
     border-radius: 0.5rem;
     padding-left: 1rem;
   }
 
+  img {
+    width: 10rem;
+  }
+
   @media (max-width: 889px) {
     input {
-      width: 28vw;
+      width: 35vw;
       height: 5vh;
     }
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 500px) {
     input {
-      width: 20vw;
-      height: 4vh;
+      width: 30vw;
     }
   }
 
-  @media (max-width: 465px) {
+  @media (max-width: 949px) {
+    img {
+      width: 7rem;
+    }
+  }
+
+  @media (max-width: 670px) {
     input {
-      width: 30vw;
+      width: 25vw;
+    }
+  }
+
+  @media (max-width: 460px) {
+    input {
+      display: none;
+    }
+
+    div {
+      display: none;
     }
   }
 `;
@@ -154,9 +195,9 @@ const Basket = styled("div")`
 
 const Number = styled("p")`
   color: white;
-  font-weight: 400;
+  font-weight: 600;
 
-  @media (max-width: 465px) {
+  @media (max-width: 580px) {
     display: none;
   }
 `;
@@ -171,12 +212,24 @@ const SearchBlock = styled("div")`
     right: 0.5rem;
     cursor: pointer;
   }
+
+  @media (max-width: 460px) {
+    .search-icon {
+      display: none;
+    }
+  }
 `;
 
 const Nav = styled("div")`
   display: flex;
   justify-content: space-around;
   padding-top: 1rem;
+
+  @media (max-width: 500px) {
+    img {
+      width: 7rem;
+    }
+  }
 
   @media (max-width: 501px) {
     display: flex;
@@ -240,5 +293,22 @@ const MiniModal = styled("div")`
 
   @media (min-width: 501px) {
     display: none;
+  }
+`;
+
+const LinkStyleHome = styled(Link)`
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: 800;
+
+  p {
+    color: white;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 949px) {
+    font-size: 30px;
   }
 `;
