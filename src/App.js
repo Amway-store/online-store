@@ -61,13 +61,13 @@ function App() {
   return (
     <Routes>
       <Route path="admin" element={<AddProduct />} />
-      <Route path="/" element={<Layout />}>
+      <Route path="home" element={<Layout />}>
         <Route index element={<HomePage />} />
         {router.map((item, id) => (
           <Route key={id} path={item.path} element={item.element} />
         ))}
       </Route>
-      <Route path="personal" element={<Personal />} />
+      <Route path="/" element={<Personal />} />
     </Routes>
   );
 }

@@ -24,4 +24,6 @@ export const selectTotalCount = (state) => state.cart.items.length;
 export const selectTotalPrice = (state) =>
   state.cart.items.reduce((acc, cur) => acc + cur.price, 0);
 
+export const { saveFormData } = cartSlice.actions;
+
 export default cartSlice.reducer;

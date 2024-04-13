@@ -22,7 +22,7 @@ export const Header = () => {
         <LinkStyle to="catalog">Каталог</LinkStyle>
         <LinkStyle to="delivery">Доставка</LinkStyle>
         <LinkStyle to="payment">Оплата</LinkStyle>
-        <LinkStyle to="personal">Личный кабинет</LinkStyle>
+        <LinkStyle to="/">Выйти</LinkStyle>
         <div>
           <GiHamburgerMenu
             size={25}
@@ -42,8 +42,8 @@ export const Header = () => {
               <LinkStyles to="payment" onClick={() => setOpenModal(false)}>
                 Оплата
               </LinkStyles>
-              <LinkStyles to="personal" onClick={() => setOpenModal(false)}>
-                Личный кабинет
+              <LinkStyles to="/" onClick={() => setOpenModal(false)}>
+                Выйти
               </LinkStyles>
             </MiniModal>
           )}

@@ -1,45 +1,84 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import styled from "styled-components";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./Personal.css";
 
 export const Personal = () => {
+  const [value, setValue] = useState("");
+  const [value2, setValue2] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (value === "admin@gmail.com" && value2 === "admin") {
+      window.location.href = "/admin";
+    } else if (value && value2) {
+      window.location.href = "home";
+    } else {
+      alert("Please fill in all fields");
+    }
+  };
+
   return (
     <div>
-      <Header>
-        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-          Главная страница
-        </Link>
-      </Header>
+      <Header></Header>
       <Nav>
-        <div>
-          <Block>
-            <h3>Регистрация</h3>
-            <div>
-              <p>Контактное лицо (ФИО):</p>
-              <input />
-            </div>
+        <div
+          className="container d-flex justify-content-center w-100"
+          style={{ marginTop: "2rem" }}
+        >
+          <div className="login">
+            <h2 className="mb-3">Login form</h2>
+            <form className="needs-validation" onSubmit={handleSubmit}>
+              <div className="form-group mb-2 was-validated">
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
+                <input
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  className="form-control"
+                  type="email"
+                  required
+                />
+                <div className="invalid-feedback">Please Enter your email</div>
+              </div>
 
-            <div>
-              <p>Контактный телефон:</p>
-              <input />
-            </div>
+              <div className="form-group mb-2 was-validated">
+                <label htmlFor="password" className="form-label">
+                  Password
+                </label>
+                <input
+                  value={value2}
+                  onChange={(e) => setValue2(e.target.value)}
+                  type="password"
+                  className="form-control"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Please Enter your password
+                </div>
+              </div>
 
-            <div>
-              <p>Email</p>
-              <input />
-            </div>
+              <div className="form-group mb-2 was-validated">
+                <input type="checkbox" className="form-check-input" />
+                <label
+                  htmlFor="checkbox"
+                  className="form-check-label"
+                  style={{ marginLeft: "0.5rem" }}
+                >
+                  Remember me
+                </label>
+              </div>
 
-            <div>
-              <p>Пароль:</p>
-              <input />
-            </div>
-
-            <div>
-              <p>Повторите пароль</p>
-              <input />
-            </div>
-            <button>Зарегистрироваться</button>
-          </Block>
+              <button
+                type="submit"
+                className="btn btn-success block mt-2 form-check w-100"
+              >
+                Sign In
+              </button>
+            </form>
+          </div>
         </div>
       </Nav>
     </div>
@@ -61,52 +100,4 @@ const Nav = styled("div")`
   width: 100%;
   height: 20vh;
   background-color: #383636;
-`;
-
-const Block = styled("form")`
-  margin-top: 1rem;
-  width: 30vw;
-  border-radius: 10px;
-  padding: 1rem;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
-  div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  p {
-    width: 15vw;
-  }
-
-  button {
-    padding: 0.5rem;
-    background-color: green;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    color: white;
-    margin-top: 1rem;
-  }
-
-  @media (max-width: 1000px) {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    div {
-      display: flex;
-      flex-direction: column;
-    }
-
-    p {
-      width: 100%;
-    }
-
-    input {
-      width: 20vw;
-    }
-  }
 `;
