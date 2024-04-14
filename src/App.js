@@ -6,7 +6,6 @@ import { Delivery } from "./components/User/delivery/Delivery";
 import { Payment } from "./components/User/ payment/ Payment";
 import { Basket } from "./components/User/basket/Basket";
 import { Personal } from "./components/User/personal/Personal";
-import { Order } from "./components/User/order/Order";
 import { AddProduct } from "./components/Admin/product/AddProduct";
 
 function App() {
@@ -26,10 +25,6 @@ function App() {
     {
       path: "basket",
       element: <Basket />,
-    },
-    {
-      path: "order",
-      element: <Order />,
     },
   ];
 

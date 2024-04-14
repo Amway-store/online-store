@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Personal.css";
+import { Link } from "react-router-dom";
 
 export const Personal = () => {
   const [value, setValue] = useState("");
@@ -21,7 +22,9 @@ export const Personal = () => {
 
   return (
     <div>
-      <Header></Header>
+      <Header>
+        <LinkStyle to="home">Главная страница</LinkStyle>
+      </Header>
       <Nav>
         <div
           className="container d-flex justify-content-center w-100"
@@ -100,4 +103,9 @@ const Nav = styled("div")`
   width: 100%;
   height: 20vh;
   background-color: #383636;
+`;
+
+const LinkStyle = styled(Link)`
+  color: white;
+  text-decoration: none;
 `;
