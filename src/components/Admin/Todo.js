@@ -38,9 +38,7 @@ export const Todo = ({ todo, handleDelete, handleEdit }) => {
         <div>
           <button
             className="button-edit"
-            onClick={() =>
-              handleEdit(todo.id, newTitle, newDescription, newPrice, newImage)
-            }
+            onClick={() => handleEdit(todo, newTitle, newDescription, newPrice)}
             style={{
               backgroundColor: "blue",
               color: "white",
@@ -52,6 +50,7 @@ export const Todo = ({ todo, handleDelete, handleEdit }) => {
           >
             Edit
           </button>
+
           <button
             className="button-delete"
             onClick={() => handleDelete(todo.id)}
