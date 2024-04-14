@@ -4,18 +4,14 @@ import { CiSearch } from "react-icons/ci";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectTotalCount,
-  selectTotalPrice,
-} from "../../../store/Catalog.slice";
+import { selectTotalCount } from "../../../store/Catalog.slice";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { selectFilterValue, setFilterValue } from "../../../store/Filter.slice";
 
 export const Header = () => {
   const dispatch = useDispatch();
   const totalCount = useSelector(selectTotalCount);
-  const totalPrice = useSelector(selectTotalPrice);
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -24,6 +20,14 @@ export const Header = () => {
   const handleFilterChange = (e) => {
     dispatch(setFilterValue(e.target.value));
   };
+
+  const [total, setTotal] = useState(totalCount);
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setTotal(cartItems.length);
+  }, []);
+
   return (
     <StyledHeader>
       <Nav>
@@ -91,9 +95,8 @@ export const Header = () => {
           <div>
             <BasketCount to="basket">
               <SlBasket size={30} color="white" cursor="pointer" />
-              <p>{totalCount}</p>
+              <p>{total}</p>
             </BasketCount>
-            <p>{totalPrice} руб</p>
           </div>
         </Basket>
         <Number>+7 985 117 6025</Number>
@@ -196,6 +199,7 @@ const Basket = styled("div")`
 const Number = styled("p")`
   color: white;
   font-weight: 600;
+  margin-top: 1rem;
 
   @media (max-width: 580px) {
     display: none;
@@ -254,7 +258,7 @@ const LinkStyle = styled(Link)`
 `;
 
 const LinkStyles = styled(Link)`
-  color: white;
+  color: #0a448b;
   text-decoration: none;
   font-weight: 600;
 `;
@@ -279,15 +283,17 @@ const BasketCount = styled(Link)`
 const MiniModal = styled("div")`
   display: flex;
   position: absolute;
-  right: 3rem;
+  right: 2rem;
   flex-direction: column;
   gap: 1rem;
 
-  width: 5rem;
-  height: 9rem;
+  width: 6rem;
+  height: 11rem;
   padding: 1rem;
   border-radius: 10px;
-  background-color: #09aa9c;
+
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
   z-index: 9999;
 

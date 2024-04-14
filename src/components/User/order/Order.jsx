@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectItems, selectTotalPrice } from "../../../store/Catalog.slice";
+import { selectItems } from "../../../store/Catalog.slice";
 
-export const Order = () => {
+export const Order = ({ total }) => {
   const product = useSelector(selectItems);
-  const total = useSelector(selectTotalPrice);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -100,7 +99,7 @@ export const Order = () => {
           <p>350 руб</p>
         </Cart>
 
-        <p style={{ fontSize: "25px" }}>Итого: {total + 350} руб</p>
+        <p>Итого: {total + 350} руб</p>
       </div>
     </Container>
   );
@@ -109,12 +108,12 @@ export const Order = () => {
 const Container = styled.div`
   display: flex;
   gap: 5rem;
-  background-color: #03cfd6;
+  background-color: #d1e9fe;
   height: 100%;
   padding: 2rem;
 
   h1 {
-    color: white;
+    color: #014572;
   }
 
   input {
@@ -140,14 +139,37 @@ const Container = styled.div`
   }
 
   p {
-    color: white;
+    color: #014572;
     font-weight: 600;
+  }
+
+  @media (max-width: 720px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 650px) {
+    button {
+      width: 35vw;
+      height: 6vh;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 420px) {
+    button {
+      height: 5vh;
+      font-size: 10px;
+    }
   }
 `;
 
 const Block = styled("form")`
   padding-right: 10rem;
-  border-right: 1px solid white;
+  border-right: 1px solid #014572;
+
+  @media (max-width: 940px) {
+    padding-right: 0;
+  }
 `;
 
 const Block2 = styled("div")`
@@ -158,11 +180,22 @@ const Block2 = styled("div")`
 
 const Cart = styled("div")`
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #014572;
 
   p {
     font-size: 25px;
+  }
+
+  @media (max-width: 940px) {
+    padding-right: 0;
+  }
+
+  @media (max-width: 470px) {
+    p {
+      font-size: 18px;
+    }
   }
 `;
