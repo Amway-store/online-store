@@ -16,6 +16,9 @@ const Catalog = () => {
 
   const handleAddToCart = (item) => {
     dispatch(addItem(item));
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]));
+    window.location.reload();
   };
 
   return (

@@ -164,7 +164,7 @@ const Container = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 1rem;
-  background-color: #03cfd6;
+  background-color: #d1e9fe;
   height: 100%;
 
   @media (max-width: 910px) {

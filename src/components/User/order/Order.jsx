@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectItems, selectTotalPrice } from "../../../store/Catalog.slice";
+import { selectItems } from "../../../store/Catalog.slice";
 
-export const Order = () => {
+export const Order = ({ total }) => {
   const product = useSelector(selectItems);
-  const total = useSelector(selectTotalPrice);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -158,6 +157,7 @@ const Block2 = styled("div")`
 
 const Cart = styled("div")`
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid white;
