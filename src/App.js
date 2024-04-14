@@ -6,7 +6,7 @@ import { Delivery } from "./components/User/delivery/Delivery";
 import { Payment } from "./components/User/ payment/ Payment";
 import { Basket } from "./components/User/basket/Basket";
 import { Personal } from "./components/User/personal/Personal";
-import { AddProduct } from "./components/Admin/product/AddProduct";
+import { Product } from "./components/Admin/product/Product";
 
 function App() {
   const router = [
@@ -30,7 +30,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="adminPage" element={<AddProduct />} />
+      <Route path="adminPage" element={<Product />} />
       <Route path="home" element={<Layout />}>
         <Route index element={<HomePage />} />
         {router.map((item, id) => (

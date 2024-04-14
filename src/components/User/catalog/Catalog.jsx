@@ -79,7 +79,7 @@ const Cart = styled.div`
     border-radius: 8px;
     border: none;
     background-color: #0177a6;
-    padding: 1rem 0rem 1rem 0rem;
+    padding: 0.5rem 0rem 0.5rem 0rem;
     color: white;
     font-weight: 800;
     font-size: 15px;
