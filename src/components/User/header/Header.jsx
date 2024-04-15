@@ -34,7 +34,7 @@ export const Header = () => {
         <LinkStyle to="catalog">Каталог</LinkStyle>
         <LinkStyle to="delivery">Доставка</LinkStyle>
         <LinkStyle to="payment">Оплата</LinkStyle>
-        <LinkStyle to="/">Выйти</LinkStyle>
+        <LinkStyle to="login">Выйти</LinkStyle>
         <div>
           <GiHamburgerMenu
             size={25}
@@ -54,7 +54,7 @@ export const Header = () => {
               <LinkStyles to="payment" onClick={() => setOpenModal(false)}>
                 Оплата
               </LinkStyles>
-              <LinkStyles to="/" onClick={() => setOpenModal(false)}>
+              <LinkStyles to="login" onClick={() => setOpenModal(false)}>
                 Выйти
               </LinkStyles>
             </MiniModal>
@@ -62,7 +62,7 @@ export const Header = () => {
         </div>
       </Nav>
       <Block>
-        <LinkStyleHome to="/home">
+        <LinkStyleHome to="/">
           <img
             src="https://www.kz.amway.com/common/medias/logo-amway-white.png?context=bWFzdGVyfGltYWdlc3wxNDg2OXxpbWFnZS9wbmd8aW1hZ2VzL2hjOC9oZmMvOTIyMzQzMDk2MzIzMC5wbmd8NTk0NzdkNDk0ZjUzMGUwYzQ2MzFhNDNhNzkxMjI2ZWE2Y2M5MjQ1YWE3YjE4YmI1ZTdiZTE2NzY0ODIzOTdmMg&ccv=Qy1LQVotTw=="
             alt="img"
@@ -84,7 +84,7 @@ export const Header = () => {
           />
         </SearchBlock>
         <Basket>
-          <Link to="/">
+          <Link to="login">
             <FaRegUser
               className="userStyle"
               size={30}

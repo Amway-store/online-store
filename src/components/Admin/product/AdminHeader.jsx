@@ -7,7 +7,7 @@ export const AdminHeader = () => {
     <Container>
       <p>Админ страница</p>
       <Link
-        to="/home"
+        to="/"
         style={{
           color: "white",
           textDecoration: "none",

@@ -17,6 +17,9 @@ export const HomePage = () => {
 
   const handleAddToCart = (item) => {
     dispatch(addItem(item));
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]));
+    window.location.reload();
   };
   return (
     <main>
@@ -24,7 +27,7 @@ export const HomePage = () => {
         <Container>
           {filteredItems.map((el) => (
             <Cart key={el.id}>
-              <img src={el.image} alt="img" />
+              <img src={el.imageUrl} alt="img" />
               <p>{el.title}</p>
               <p>{el.description}</p>
               <p>{el.price} рубль</p>
@@ -128,11 +131,8 @@ const Cart = styled.div`
   }
 
   p {
-    color: white;
-    font-weight: 600;
-  }
-  &:hover p {
     color: black;
+    font-weight: 600;
   }
 
   button {
