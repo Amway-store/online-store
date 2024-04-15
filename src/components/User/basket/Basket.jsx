@@ -13,6 +13,7 @@ export const Basket = () => {
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     setDeleteItem(cartItems);
+    console.log(cartItems);
   }, []);
 
   const onDelete = (id) => {
@@ -36,7 +37,7 @@ export const Basket = () => {
   return (
     <div>
       {showComponent2 ? (
-        <Order total={total} />
+        <Order total={total} onDelete={onDelete} />
       ) : (
         <Container>
           {deleteItem.length === 0 ? (
@@ -52,8 +53,6 @@ export const Basket = () => {
                       <Title>{el.title}</Title>
                       <p>{el.description}</p>
                       <p style={{ color: "black" }}>{el.price} рубль</p>
-
-                      <button onClick={() => onDelete(el.id)}>Delete</button>
                     </div>
                     <MdOutlineClose
                       className="closeIcon"

@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectItems } from "../../../store/Catalog.slice";
+import { selectItems, selectTotalCount } from "../../../store/Catalog.slice";
 
-export const Order = ({ total }) => {
+export const Order = () => {
   const product = useSelector(selectItems);
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    console.log(cartItems);
+  }, []);
+
+  const totalCount = useSelector(selectTotalCount);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -33,7 +40,16 @@ export const Order = ({ total }) => {
     form.reset();
     setFormData({ name: "", email: "", tel: "", address: "", total: "" });
     alert("Сообщение отправлено!");
+    localStorage.removeItem("cartItems");
+    window.location.reload();
   };
+
+  const [total, setTotal] = useState(totalCount);
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setTotal(cartItems.length);
+  }, []);
 
   return (
     <Container>
