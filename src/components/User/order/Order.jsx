@@ -62,12 +62,8 @@ export const Order = ({ total }) => {
 
         <p>Ваш email</p>
         <input name="email" value={formData.email} onChange={handleChange} />
-        <p>Итоговое сумма с доставкой</p>
-        <input
-          name="total"
-          value={`${total + 350} руб`}
-          onChange={handleChange}
-        />
+        <p style={{ marginTop: "2rem" }}>Итоговое сумма с доставкой</p>
+        <p style={{ fontSize: "20px", fontWeight: "800" }}>{total + 350} руб</p>
         <br />
         <br />
         <br />

@@ -19,6 +19,7 @@ export const Basket = () => {
     const updatedCartItems = deleteItem.filter((item) => item.id !== id);
     setDeleteItem(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+    window.location.reload();
   };
 
   const total = deleteItem.reduce(
