@@ -160,6 +160,10 @@ const ModalContent = styled.div`
     margin-top: 1rem;
     justify-content: end;
   }
+
+  @media (max-width: 700px) {
+    width: 20rem;
+  }
 `;
 
 const BlockImg = styled("div")`
