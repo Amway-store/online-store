@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import {
-  removeAllItem,
-  selectItems,
-  selectTotalCount,
-} from "../../../store/Catalog.slice";
+import { selectItems, selectTotalCount } from "../../../store/Catalog.slice";
 
 export const Order = () => {
   const product = useSelector(selectItems);
