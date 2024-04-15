@@ -166,10 +166,6 @@ const Block = styled("div")`
     input {
       display: none;
     }
-
-    div {
-      display: none;
-    }
   }
 `;
 
