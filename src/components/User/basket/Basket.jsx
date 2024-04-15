@@ -141,10 +141,6 @@ const Cart = styled.div`
     }
   }
 
-  @media (max-width: 580px) {
-    width: 30rem;
-  }
-
   @media (max-width: 540px) {
     display: flex;
     flex-direction: column;
