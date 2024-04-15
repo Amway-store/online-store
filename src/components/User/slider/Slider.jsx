@@ -1,49 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "react-slideshow-image/dist/styles.css";
 import { Slide } from "react-slideshow-image";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
-const data = [
-  {
-    title: "Amway Home™",
-    desc: "SA8™ Концентрированное жидкое средство для стирки, 4 л",
-    image:
-      "https://www.kz.amway.com/common/medias/EIA.w600.h600.110478-05.04.21-1-120421.jpg?context=bWFzdGVyfHJvb3R8MjQ1OTN8aW1hZ2UvanBlZ3xoOGIvaGUzLzk1MzU3MDM4NDI4NDYuanBnfDk1YWRjYTUxYjcwNzJmZWEwM2E1MTliOTExNzM3Y2E5ODA4ZDY5YTA0NTUyMzc2ZmEzZDVjYTFhMWU2NmQ5ZWE&ccv=S0FaLU8=",
-  },
-  {
-    title: "Amway Home™",
-    desc: "SA8™ Универсальный отбеливатель для всех типов тканей",
-    image:
-      "https://www.kz.amway.com/common/medias/EIA.w600.h600.124485-05.04.21-1-130421.jpg?context=bWFzdGVyfHJvb3R8NTE2OTd8aW1hZ2UvanBlZ3xoMjgvaGQ4Lzk1MzYzMTE2MjM3MTAuanBnfGY3MmIyZmJmZjQwMTZhZmI4ZjEyMDg4NWIwNjhkNGZhZmJlZTBiYTlkOTIzOTRlNTJlY2EyMjllNTc5Y2QwYmQ&ccv=S0FaLU8=",
-  },
-  {
-    title: "Amway Home™",
-    desc: "SA8™ Концентрированное жидкое средство для стирки цветного и черного белья",
-    image:
-      "https://www.kz.amway.com/common/medias/EIA.w600.h600.124456-05.04.21-1-130421.jpg?context=bWFzdGVyfHJvb3R8MjE4NTF8aW1hZ2UvanBlZ3xoMGQvaGExLzk1MzYzMDcxMzQ0OTQuanBnfGUzNGNhZTk0N2ZkOWM2NGYwN2FkNjAyOWZjOWUxYzJlMmEzMjEzYWU2MmNlYzczNDM2ZjE5ZTllN2E1ZmRjYzI&ccv=S0FaLU8=",
-  },
-];
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "../../../firebase";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export const Slider = () => {
+  const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  console.log(todos);
+
+  useEffect(() => {
+    const q = query(collection(db, "todos"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      let todosArray = [];
+      querySnapshot.forEach((doc) => {
+        todosArray.push({ ...doc.data(), id: doc.id });
+      });
+      setTodos(todosArray);
+      setLoading(false);
+    });
+    return () => unsub();
+  }, []);
   return (
     <Block>
-      <div className="slide-container">
-        <Slide autoplay={true} duration={4000} transitionDuration={500}>
-          {data.map((el, index) => (
-            <Container key={index}>
-              <div>
-                <h2>{el.title}</h2>
-                <p>{el.desc}</p>
-                <Link to="catalog">
-                  <button>Купить</button>
-                </Link>
-              </div>
-              <img src={el.image} alt="" />
-            </Container>
-          ))}
-        </Slide>
-      </div>
+      {loading ? (
+        <Loader>
+          <CircularProgress color="secondary" />
+        </Loader>
+      ) : (
+        <div className="slide-container">
+          <Slide autoplay={true} duration={4000} transitionDuration={500}>
+            {todos.map((el, index) => (
+              <Container key={index}>
+                <div>
+                  <h2>{el.description}</h2>
+                  <p>{el.price} руб</p>
+                  <Link to="catalog">
+                    <button>Купить</button>
+                  </Link>
+                </div>
+                <img src={el.imageUrl} alt="" />
+              </Container>
+            ))}
+          </Slide>
+        </div>
+      )}
     </Block>
   );
 };
@@ -61,6 +66,7 @@ const Container = styled("div")`
   }
 
   h2 {
+    width: 30rem;
     color: #0048ae;
   }
 
@@ -117,4 +123,17 @@ const Block = styled("main")`
   @media (max-width: 450px) {
     display: none;
   }
+`;
+
+const Loader = styled("div")`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 `;

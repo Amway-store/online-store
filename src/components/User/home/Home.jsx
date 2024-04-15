@@ -1,20 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectFilterValue } from "../../../store/Filter.slice";
-import { product } from "../../../utils/data";
 import { addItem } from "../../../store/Catalog.slice";
 import { Slider } from "../slider/Slider";
+import { useEffect, useState } from "react";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 export const HomePage = () => {
   const dispatch = useDispatch();
+  const [todos, setTodos] = useState([]);
+
   const filterValue = useSelector(selectFilterValue);
 
-  const filteredItems = product.filter(
-    (item) =>
-      item.title.toLowerCase().includes(filterValue.toLowerCase()) ||
-      item.description.toLowerCase().includes(filterValue.toLowerCase())
-  );
+  useEffect(() => {
+    const q = query(collection(db, "todos"));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      let todosArray = [];
+      querySnapshot.forEach((doc) => {
+        todosArray.push({ ...doc.data(), id: doc.id });
+      });
+      setTodos(todosArray);
+    });
+    return () => unsub();
+  }, []);
 
+  const filteredItems = todos.filter((item) =>
+    item.description.toLowerCase().includes(filterValue.toLowerCase())
+  );
   const handleAddToCart = (item) => {
     dispatch(addItem(item));
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -28,7 +41,6 @@ export const HomePage = () => {
           {filteredItems.map((el) => (
             <Cart key={el.id}>
               <img src={el.imageUrl} alt="img" />
-              <p>{el.title}</p>
               <p>{el.description}</p>
               <p>{el.price} рубль</p>
               <button onClick={() => handleAddToCart(el)}>В корзину</button>
