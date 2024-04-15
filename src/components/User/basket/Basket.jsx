@@ -13,14 +13,13 @@ export const Basket = () => {
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     setDeleteItem(cartItems);
-    console.log(cartItems);
   }, []);
 
   const onDelete = (id) => {
     const updatedCartItems = deleteItem.filter((item) => item.id !== id);
     setDeleteItem(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-    window.location.reload();
+    setDeleteItem(updatedCartItems);
   };
 
   const total = deleteItem.reduce(
