@@ -99,7 +99,7 @@ export const Header = () => {
             </BasketCount>
           </div>
         </Basket>
-        <Number>+7 985 117 6025</Number>
+        <Number>olegova20@yandex.ru</Number>
       </Block>
     </StyledHeader>
   );

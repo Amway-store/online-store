@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectItems, selectTotalCount } from "../../../store/Catalog.slice";
+import { selectItems, selectTotalPrice } from "../../../store/Catalog.slice";
 
 export const Order = () => {
   const product = useSelector(selectItems);
@@ -11,7 +11,7 @@ export const Order = () => {
     console.log(cartItems);
   }, []);
 
-  const totalCount = useSelector(selectTotalCount);
+  const totalCount = useSelector(selectTotalPrice);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -48,7 +48,7 @@ export const Order = () => {
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setTotal(cartItems.length);
+    setTotal(cartItems.reduce((acc, curr) => acc + parseFloat(curr.price), 0));
   }, []);
 
   return (
