@@ -14,7 +14,7 @@ export const Personal = () => {
     if (value === "admin@gmail.com" && value2 === "admin") {
       window.location.href = "/adminPage";
     } else if (value && value2) {
-      window.location.href = "home";
+      window.location.href = "/";
     } else {
       alert("Please fill in all fields");
     }
@@ -23,7 +23,7 @@ export const Personal = () => {
   return (
     <div>
       <Header>
-        <LinkStyle to="home">Главная страница</LinkStyle>
+        <LinkStyle to="/">Главная страница</LinkStyle>
       </Header>
       <Nav>
         <div

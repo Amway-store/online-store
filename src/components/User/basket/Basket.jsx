@@ -16,16 +16,15 @@ export const Basket = () => {
   }, []);
 
   const onDelete = (id) => {
-    const newProduct = deleteItem.filter((item) => item.id !== id);
-    setDeleteItem(newProduct);
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const updatedCartItems = cartItems.filter((item) => item.id !== id);
+    const updatedCartItems = deleteItem.filter((item) => item.id !== id);
+    setDeleteItem(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-
-    window.location.reload();
   };
 
-  const total = deleteItem.reduce((acc, curr) => acc + curr.price, 0);
+  const total = deleteItem.reduce(
+    (acc, curr) => acc + parseFloat(curr.price),
+    0
+  );
 
   const [showComponent2, setShowComponent2] = useState(false);
 
@@ -47,7 +46,7 @@ export const Basket = () => {
                 <h2>Корзина</h2>
                 {deleteItem.map((el) => (
                   <Cart key={el.id}>
-                    <img src={el.image} alt="img" />
+                    <img src={el.imageUrl} alt="img" />
                     <div>
                       <Title>{el.title}</Title>
                       <p>{el.description}</p>
@@ -68,14 +67,7 @@ export const Basket = () => {
 
               <Block>
                 <h3>Итого к оплате: {total} руб</h3>
-                <button onClick={goToComponent2}>
-                  {/* <Link
-             style={{ color: "white", textDecoration: "none" }}
-             to="hello"
-           > */}
-                  Оформить заказ
-                  {/* </Link> */}
-                </button>
+                <button onClick={goToComponent2}>Оформить заказ</button>
               </Block>
             </ContainerChilde>
           )}

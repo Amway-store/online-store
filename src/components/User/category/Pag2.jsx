@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../../store/Catalog.slice";
+import styled from "styled-components";
 import { selectFilterValue } from "../../../store/Filter.slice";
-import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
-import { db } from "../../../firebase";
+import { addItem } from "../../../store/Catalog.slice";
 import CircularProgress from "@mui/material/CircularProgress";
+import { db } from "../../../firebase";
 
-const Catalog = () => {
+export const Pag2 = () => {
   const dispatch = useDispatch();
   const [todos, setTodos] = useState([]);
 
@@ -32,13 +32,16 @@ const Catalog = () => {
     item.description.toLowerCase().includes(filterValue.toLowerCase())
   );
 
+  const filteredData = filteredItems.filter(
+    (item) => item.selectedCategory === "Средства для очистки поверхностей"
+  );
+
   const handleAddToCart = (item) => {
     dispatch(addItem(item));
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]));
     window.location.reload();
   };
-
   return (
     <Container>
       {loading ? (
@@ -46,9 +49,10 @@ const Catalog = () => {
           <CircularProgress color="secondary" />
         </Loader>
       ) : (
-        filteredItems.map((el) => (
+        filteredData.map((el) => (
           <Cart key={el.id}>
             <img src={el.imageUrl} alt="img" />
+            <p>{el.title}</p>
             <p>{el.description}</p>
             <p>{el.price} рубль</p>
             <button onClick={() => handleAddToCart(el)}>В корзину</button>
@@ -78,7 +82,6 @@ const Container = styled.div`
     grid-template-columns: repeat(2, 1fr);
   }
 `;
-
 const Cart = styled.div`
   position: relative;
   display: flex;
@@ -134,4 +137,3 @@ const Loader = styled("div")`
   align-items: center;
   z-index: 999;
 `;
-export default Catalog;
