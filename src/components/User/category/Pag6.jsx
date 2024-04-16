@@ -7,7 +7,7 @@ import { addItem } from "../../../store/Catalog.slice";
 import CircularProgress from "@mui/material/CircularProgress";
 import { db } from "../../../firebase";
 
-export const Pag1 = () => {
+export const Pag6 = () => {
   const dispatch = useDispatch();
   const [todos, setTodos] = useState([]);
 
@@ -33,7 +33,7 @@ export const Pag1 = () => {
   );
 
   const filteredData = filteredItems.filter(
-    (item) => item.selectedCategory === "Средства для стирки"
+    (item) => item.selectedCategory === "Уход за телом G&H"
   );
   const handleAddToCart = (item) => {
     dispatch(addItem(item));
@@ -147,7 +147,6 @@ const Loader = styled("div")`
   align-items: center;
   z-index: 999;
 `;
-
 const Discount = styled("div")`
   position: absolute;
 

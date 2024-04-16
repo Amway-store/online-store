@@ -10,6 +10,7 @@ export const AddTodo = ({ setOpenModal }) => {
   );
 
   const [description, setDescription] = useState("");
+  const [discount, setDiscount] = useState(null);
   const [price, setPrice] = useState(null);
   const [image, setImage] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
@@ -25,12 +26,14 @@ export const AddTodo = ({ setOpenModal }) => {
       description,
       price,
       imageUrl,
+      discount,
     };
 
     const docRef = await addDoc(collection(db, "todos"), todoData);
     console.log("Document written with ID: ", docRef.id);
     setDescription("");
     setPrice();
+    setDiscount();
     setImage(null);
     setImageUrl("");
     setShowImage(false);
@@ -71,6 +74,18 @@ export const AddTodo = ({ setOpenModal }) => {
             <option value="Средства по уходу за детьми">
               Средства по уходу за детьми
             </option>
+
+            <option value="Уход за телом G&H">Уход за телом G&H</option>
+            <option value="Глистеры для полости рта">
+              Глистеры для полости рта
+            </option>
+            <option value="Средства для мужчин">Средства для мужчин</option>
+            <option value="Шампуни SATINIQUE">Шампуни SATINIQUE</option>
+            <option value="Витамины NUTRILITE">Витамины NUTRILITE</option>
+
+            <option value="Парфюмерия из Франции">Парфюмерия из Франции</option>
+            <option value="Фильтр e-Springe">Фильтр e-Springe</option>
+            <option value="Косметика">Косметика</option>
           </select>
           <TextField
             id="standard-basic"
@@ -85,6 +100,13 @@ export const AddTodo = ({ setOpenModal }) => {
             variant="standard"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+          />
+          <TextField
+            id="standard-basic"
+            label="Скидка"
+            variant="standard"
+            value={discount}
+            onChange={(e) => setDiscount(e.target.value)}
           />
           <div>
             <input type="file" onChange={handleImageChange} />

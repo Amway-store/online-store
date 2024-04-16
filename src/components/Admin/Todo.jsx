@@ -13,10 +13,20 @@ export const Todo = ({ todo, handleDelete, loading }) => {
         <>
           {todo?.map((el) => (
             <Cart>
-              <img src={el.imageUrl} alt="Todo" />
+              <div style={{ position: "relative" }}>
+                <img src={el.imageUrl} alt="Todo" />
+                <div style={{ paddingLeft: "0.5rem" }}>
+                  <Discount>{el.discount} %</Discount>
+                </div>
+              </div>
               <p>{el.title}</p>
               <p>{el.description}</p>
-              <p>{el.price} руб</p>
+              <div>
+                <p style={{ color: "gray", textDecoration: "line-through" }}>
+                  {el.price} руб
+                </p>
+                <p>{(el.price * (1 - el.discount / 100)).toFixed(2)} руб</p>
+              </div>
 
               <button onClick={() => handleDelete(el.id)}>Delete</button>
             </Cart>
@@ -48,7 +58,7 @@ const Cart = styled("div")`
     width: 15vw;
   }
   p {
-    color: black;
+    color: #d5d5d5;
     font-weight: 600;
   }
 
@@ -82,4 +92,20 @@ const Loader = styled("div")`
   justify-content: center;
   align-items: center;
   z-index: 999;
+`;
+
+const Discount = styled("div")`
+  position: absolute;
+
+  top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: red;
+  border-radius: 50px;
+
+  font-size: 12px;
+  color: white;
 `;
