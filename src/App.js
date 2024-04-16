@@ -12,6 +12,14 @@ import { Pag2 } from "./components/User/category/Pag2";
 import { Pag3 } from "./components/User/category/Pag3";
 import { Pag4 } from "./components/User/category/Pag4";
 import { Pag5 } from "./components/User/category/Pag5";
+import { Pag6 } from "./components/User/category/Pag6";
+import { Pag7 } from "./components/User/category/Pag7";
+import { Pag8 } from "./components/User/category/Pag8";
+import { Pag9 } from "./components/User/category/Pag9";
+import { Pag10 } from "./components/User/category/Pag10";
+import { Pag11 } from "./components/User/category/Pag11";
+import { Pag12 } from "./components/User/category/Pag12";
+import { Pag13 } from "./components/User/category/Pag13";
 
 function App() {
   const router = [
@@ -50,6 +58,38 @@ function App() {
     {
       path: "page5",
       element: <Pag5 />,
+    },
+    {
+      path: "page6",
+      element: <Pag6 />,
+    },
+    {
+      path: "page7",
+      element: <Pag7 />,
+    },
+    {
+      path: "page8",
+      element: <Pag8 />,
+    },
+    {
+      path: "page9",
+      element: <Pag9 />,
+    },
+    {
+      path: "page10",
+      element: <Pag10 />,
+    },
+    {
+      path: "page11",
+      element: <Pag11 />,
+    },
+    {
+      path: "page12",
+      element: <Pag12 />,
+    },
+    {
+      path: "page13",
+      element: <Pag13 />,
     },
   ];
 

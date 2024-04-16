@@ -7,7 +7,7 @@ import { addItem } from "../../../store/Catalog.slice";
 import CircularProgress from "@mui/material/CircularProgress";
 import { db } from "../../../firebase";
 
-export const Pag1 = () => {
+export const Pag11 = () => {
   const dispatch = useDispatch();
   const [todos, setTodos] = useState([]);
 
@@ -33,7 +33,7 @@ export const Pag1 = () => {
   );
 
   const filteredData = filteredItems.filter(
-    (item) => item.selectedCategory === "Средства для стирки"
+    (item) => item.selectedCategory === "Парфюмерия из Франции"
   );
   const handleAddToCart = (item) => {
     dispatch(addItem(item));

@@ -6,6 +6,8 @@ export const Navlink = () => {
   const location = useLocation();
   const [selectedPage, setSelectedPage] = useState("");
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return location.pathname !== "/basket" ? (
     <div>
       <Block1>
@@ -45,6 +47,83 @@ export const Navlink = () => {
           >
             Средства по уходу за детьми
           </LinkStyle>
+          <span
+            onMouseEnter={() => setIsModalVisible(true)}
+            onMouseLeave={() => setIsModalVisible(false)}
+          >
+            Еще
+          </span>
+
+          {isModalVisible && (
+            <div
+              onMouseEnter={() => setIsModalVisible(true)}
+              onMouseLeave={() => setIsModalVisible(false)}
+              style={{
+                display: "flex",
+                justifyContent: "end",
+              }}
+            >
+              <ModalMore>
+                <LinkStyle
+                  to="page6"
+                  onClick={() => setSelectedPage("page6")}
+                  selected={selectedPage === "page6"}
+                >
+                  Уход за телом G&H
+                </LinkStyle>
+                <LinkStyle
+                  to="page7"
+                  onClick={() => setSelectedPage("page7")}
+                  selected={selectedPage === "page7"}
+                >
+                  Глистеры для полости рта
+                </LinkStyle>
+                <LinkStyle
+                  to="page8"
+                  onClick={() => setSelectedPage("page8")}
+                  selected={selectedPage === "page8"}
+                >
+                  Средства для мужчин
+                </LinkStyle>
+                <LinkStyle
+                  to="page9"
+                  onClick={() => setSelectedPage("page9")}
+                  selected={selectedPage === "page9"}
+                >
+                  Шампуни SATINIQUE
+                </LinkStyle>
+                <LinkStyle
+                  to="page10"
+                  onClick={() => setSelectedPage("page10")}
+                  selected={selectedPage === "page10"}
+                >
+                  Витамины NUTRILITE
+                </LinkStyle>
+
+                <LinkStyle
+                  to="page11"
+                  onClick={() => setSelectedPage("page11")}
+                  selected={selectedPage === "page11"}
+                >
+                  Парфюмерия из Франции
+                </LinkStyle>
+                <LinkStyle
+                  to="page12"
+                  onClick={() => setSelectedPage("page12")}
+                  selected={selectedPage === "page12"}
+                >
+                  Фильтр e-Springe
+                </LinkStyle>
+                <LinkStyle
+                  to="page13"
+                  onClick={() => setSelectedPage("page13")}
+                  selected={selectedPage === "page13"}
+                >
+                  Косметика
+                </LinkStyle>
+              </ModalMore>
+            </div>
+          )}
         </div>
 
         <select onChange={(e) => (window.location.href = e.target.value)}>
@@ -85,12 +164,19 @@ const Block = styled("div")`
 
 const Block1 = styled("div")`
   display: flex;
-  justify-content: space-around;
+  background-color: #00ffff;
+  padding: 1rem 1rem 1rem 1rem;
   div {
     display: flex;
+    align-items: center;
     gap: 2rem;
     @media (max-width: 700px) {
       display: none;
+    }
+
+    span {
+      font-weight: 600;
+      cursor: pointer;
     }
   }
 
@@ -107,7 +193,25 @@ const Block1 = styled("div")`
 `;
 
 const LinkStyle = styled(Link)`
-  font-weight: 800;
+  font-weight: 600;
   text-decoration: none;
   color: ${(props) => (props.selected ? "red" : "#014572")};
+  &:hover {
+    color: red;
+  }
+`;
+
+const ModalMore = styled("div")`
+  position: absolute;
+  top: 12rem;
+  right: 8rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+  height: 38rem;
+  background-color: #00ffff;
+  z-index: 9999;
+  border-radius: 10px 0px 10px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 `;
