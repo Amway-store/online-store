@@ -20,8 +20,14 @@ import { Pag10 } from "./components/User/category/Pag10";
 import { Pag11 } from "./components/User/category/Pag11";
 import { Pag12 } from "./components/User/category/Pag12";
 import { Pag13 } from "./components/User/category/Pag13";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectTotalCount } from "./store/Catalog.slice";
 
 function App() {
+  const totalCount = useSelector(selectTotalCount);
+  const [total, setTotal] = useState(totalCount);
+
   const router = [
     {
       path: "catalog",
@@ -96,8 +102,8 @@ function App() {
   return (
     <Routes>
       <Route path="adminPage" element={<Product />} />
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+      <Route path="/" element={<Layout total={total} setTotal={setTotal} />}>
+        <Route index element={<HomePage total={total} />} />
         {router.map((item, id) => (
           <Route key={id} path={item.path} element={item.element} />
         ))}

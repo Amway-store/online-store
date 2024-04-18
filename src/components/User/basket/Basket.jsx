@@ -12,7 +12,11 @@ export const Basket = () => {
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setDeleteItem(cartItems);
+    if (Array.isArray(cartItems)) {
+      setDeleteItem(cartItems);
+    } else {
+      // Обработка случая, если cartItems не является массивом
+    }
   }, []);
 
   const onDelete = (id) => {

@@ -4,14 +4,14 @@ import { CiSearch } from "react-icons/ci";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTotalCount } from "../../../store/Catalog.slice";
+// import { selectTotalCount } from "../../../store/Catalog.slice";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { selectFilterValue, setFilterValue } from "../../../store/Filter.slice";
 
-export const Header = () => {
+export const Header = ({ setTotal, total }) => {
   const dispatch = useDispatch();
-  const totalCount = useSelector(selectTotalCount);
+  // const totalCount = useSelector(selectTotalCount);
 
   const [openModal, setOpenModal] = useState(false);
 
@@ -21,7 +21,7 @@ export const Header = () => {
     dispatch(setFilterValue(e.target.value));
   };
 
-  const [total, setTotal] = useState(totalCount);
+  // const [total, setTotal] = useState(totalCount);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];

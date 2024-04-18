@@ -5,6 +5,7 @@ import { selectFilterValue } from "../../../store/Filter.slice";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Catalog = () => {
@@ -36,38 +37,49 @@ const Catalog = () => {
     dispatch(addItem(item));
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]));
-    window.location.reload();
   };
 
   return (
-    <Container>
-      {loading ? (
-        <Loader>
-          <CircularProgress color="secondary" />
-        </Loader>
-      ) : (
-        filteredItems.map((el) => (
-          <Cart>
-            <div style={{ position: "relative" }}>
-              <img src={el.imageUrl} alt="Todo" />
-              <div style={{ paddingLeft: "0.5rem" }}>
-                <Discount>{el.discount} %</Discount>
+    <div className="flex flex-col bg-[#d1e9fe]">
+      <div className="w-full h-[15vh] bg-[#d1e9fe] flex justify-center">
+        <p className="w-[93.8%] h-[10vh] bg-white text-[grey] font-[bold] text-[1.2rem] flex justify-start gap-3 items-center pl-10">
+          <Link to="/" className="cursor-pointer no-underline text-[grey]">
+            Главная
+          </Link>{" "}
+          <span>/</span> <span>Каталог</span>
+        </p>
+      </div>
+      <Container>
+        {loading ? (
+          <Loader>
+            <CircularProgress color="secondary" />
+          </Loader>
+        ) : (
+          filteredItems.map((el) => (
+            <Cart>
+              <div style={{ position: "relative" }}>
+                <img src={el.imageUrl} alt="Todo" />
+                <div style={{ paddingLeft: "0.5rem" }}>
+                  <Discount>{el.discount} %</Discount>
+                </div>
               </div>
-            </div>
-            <p>{el.title}</p>
-            <p>{el.description}</p>
-            <div>
-              <p style={{ color: "gray", textDecoration: "line-through" }}>
-                {el.price} руб
-              </p>
-              <p>{(el.price * (1 - el.discount / 100)).toFixed(2)} руб</p>
-            </div>
+              <p>{el.title}</p>
+              <p>{el.description}</p>
+              <div>
+                <p style={{ color: "gray", textDecoration: "line-through" }}>
+                  {el.price} руб
+                </p>
+                <p className="text-[1.5rem] font-[bold] ">
+                  {(el.price * (1 - el.discount / 100)).toFixed(2)} руб
+                </p>
+              </div>
 
-            <button onClick={() => handleAddToCart(el)}>В корзину</button>
-          </Cart>
-        ))
-      )}
-    </Container>
+              <button onClick={() => handleAddToCart(el)}>В корзину</button>
+            </Cart>
+          ))
+        )}
+      </Container>
+    </div>
   );
 };
 
@@ -75,9 +87,10 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  padding: 1rem;
+  padding-left: 3rem;
+  padding-top: 1rem;
 
-  background-color: #d1e9fe;
+  /* background-color: #d1e9fe; */
   height: 100%;
 
   @media (max-width: 910px) {
@@ -96,9 +109,10 @@ const Cart = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  width: 20vw;
 
   img {
-    width: 18vw;
+    width: 20vw;
   }
 
   p {

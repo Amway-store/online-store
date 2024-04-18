@@ -41,7 +41,6 @@ export const Order = () => {
     setFormData({ name: "", email: "", tel: "", address: "", total: "" });
     alert("Сообщение отправлено!");
     localStorage.removeItem("cartItems");
-    window.location.reload();
   };
 
   const [total, setTotal] = useState(totalCount);

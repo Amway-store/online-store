@@ -117,7 +117,7 @@ export const Navlink = () => {
                 <LinkStyle
                   to="page13"
                   onClick={() => setSelectedPage("page13")}
-                  selected={selectedPage === "page13"}
+                  selected={selectedPage === "Средства по уходу за детьми"}
                 >
                   Косметика
                 </LinkStyle>
@@ -135,6 +135,15 @@ export const Navlink = () => {
           <option value="/page3">Средства для мытья посуды</option>
           <option value="/page4">Дозаторы и аппликаторы</option>
           <option value="/page5">Средства по уходу за детьми</option>
+
+          <option value="/page6">Уход за телом G&H</option>
+          <option value="/page7">Глистеры для полости рта</option>
+          <option value="/page8">Средства для мужчин</option>
+          <option value="/page9">Шампуни SATINIQUE</option>
+          <option value="/page10">Витамины NUTRILITE</option>
+          <option value="/page11">Парфюмерия из Франции</option>
+          <option value="/page12">Фильтр e-Springe</option>
+          <option value="/page13">Косметика</option>
         </select>
       </Block1>
       <Block>
@@ -203,8 +212,8 @@ const LinkStyle = styled(Link)`
 
 const ModalMore = styled("div")`
   position: absolute;
-  top: 12rem;
-  right: 8rem;
+  margin-top: 39rem;
+
   padding: 0.5rem;
   display: flex;
   flex-direction: column;

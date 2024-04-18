@@ -6,8 +6,11 @@ import { Slider } from "../slider/Slider";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { Link } from "react-router-dom";
+import { FaRegUser } from "react-icons/fa6";
+import { SlBasket } from "react-icons/sl";
 
-export const HomePage = () => {
+export const HomePage = ({ total }) => {
   const dispatch = useDispatch();
   const [todos, setTodos] = useState([]);
 
@@ -32,7 +35,6 @@ export const HomePage = () => {
     dispatch(addItem(item));
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]));
-    window.location.reload();
   };
   return (
     <main>
@@ -74,6 +76,14 @@ export const HomePage = () => {
               <p>Оплата наличными или переводом на карту при получении.</p>
             </div>
           </Block2>
+          <Basket className="fixed z-10 top-4 right-4">
+            <div className="w-[3.5rem] h-[3.5rem] bg-[#063064] flex justify-center items-center rounded-lg">
+              <BasketCount to="basket">
+                <SlBasket size={30} color="white" cursor="pointer" />
+                <p>{total}</p>
+              </BasketCount>
+            </div>
+          </Basket>
         </div>
       )}
     </main>
@@ -187,5 +197,46 @@ const Container = styled.div`
   @media (max-width: 445px) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const Basket = styled("div")`
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  div {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    p {
+      color: white;
+      font-weight: 600;
+    }
+  }
+
+  @media (max-width: 750px) {
+    gap: 0rem;
+
+    .userStyle {
+      display: none;
+    }
+  }
+`;
+
+const BasketCount = styled(Link)`
+  position: relative;
+
+  p {
+    display: flex;
+    position: absolute;
+    left: 18px;
+    bottom: 3px;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50px;
+    font-size: 10px;
+    background-color: red;
   }
 `;
