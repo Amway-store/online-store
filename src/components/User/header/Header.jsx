@@ -9,7 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { useEffect, useState } from "react";
 import { selectFilterValue, setFilterValue } from "../../../store/Filter.slice";
 
-export const Header = ({ setTotal, total }) => {
+export const Header = ({ total, setTotal }) => {
   const dispatch = useDispatch();
   // const totalCount = useSelector(selectTotalCount);
 

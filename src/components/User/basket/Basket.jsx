@@ -5,7 +5,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { selectItems } from "../../../store/Catalog.slice";
 import { Order } from "../order/Order";
 
-export const Basket = () => {
+export const Basket = ({ setTotal }) => {
   const product = useSelector(selectItems);
 
   const [deleteItem, setDeleteItem] = useState(product);
@@ -24,6 +24,8 @@ export const Basket = () => {
     setDeleteItem(updatedCartItems);
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     setDeleteItem(updatedCartItems);
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    setTotal(cartItems.length > 0 ? cartItems.length - 1 : 0);
   };
 
   const total = deleteItem.reduce(

@@ -8,7 +8,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { db } from "../../../firebase";
 import { Link } from "react-router-dom";
 
-export const Pag2 = () => {
+export const Pag2 = ({ setTotal }) => {
   const dispatch = useDispatch();
   const [todos, setTodos] = useState([]);
 
@@ -41,6 +41,7 @@ export const Pag2 = () => {
     dispatch(addItem(item));
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]));
+    setTotal(cartItems.length + 1);
   };
   return (
     <>
