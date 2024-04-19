@@ -41,6 +41,7 @@ export const Order = () => {
     setFormData({ name: "", email: "", tel: "", address: "", total: "" });
     alert("Сообщение отправлено!");
     localStorage.removeItem("cartItems");
+    window.location.reload();
   };
 
   const [total, setTotal] = useState(totalCount);
@@ -89,17 +90,6 @@ export const Order = () => {
         <button type="submit">Подтвердить заказ</button>
       </Block>
       <div>
-        {product.map((el) => (
-          <Block2 key={el.id}>
-            <img src={el.image} alt="img" />
-            <div>
-              <p>{el.title}</p>
-              <p>{el.description}</p>
-              <p>{el.price} рубль</p>
-            </div>
-          </Block2>
-        ))}
-
         <Cart>
           <p>Общая сумма товара</p>
           <p>{total} руб</p>
