@@ -8,7 +8,7 @@ import { db } from "../../../firebase";
 import { Link } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const Catalog = () => {
+const Catalog = ({ setTotal }) => {
   const dispatch = useDispatch();
   const [todos, setTodos] = useState([]);
 
@@ -37,7 +37,7 @@ const Catalog = () => {
     dispatch(addItem(item));
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     localStorage.setItem("cartItems", JSON.stringify([...cartItems, item]));
-    console.log("ali");
+    setTotal(cartItems.length + 1);
   };
 
   return (

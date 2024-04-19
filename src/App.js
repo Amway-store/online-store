@@ -26,12 +26,14 @@ import { selectTotalCount } from "./store/Catalog.slice";
 
 function App() {
   const totalCount = useSelector(selectTotalCount);
+  console.log("totalCount: ", totalCount);
   const [total, setTotal] = useState(totalCount);
+  console.log("total: ", total);
 
   const router = [
     {
       path: "catalog",
-      element: <Catalog />,
+      element: <Catalog setTotal={setTotal} />,
     },
     {
       path: "delivery",
@@ -43,59 +45,59 @@ function App() {
     },
     {
       path: "basket",
-      element: <Basket />,
+      element: <Basket setTotal={setTotal} />,
     },
     {
       path: "page1",
-      element: <Pag1 />,
+      element: <Pag1 setTotal={setTotal} />,
     },
     {
       path: "page2",
-      element: <Pag2 />,
+      element: <Pag2 setTotal={setTotal} />,
     },
     {
       path: "page3",
-      element: <Pag3 />,
+      element: <Pag3 setTotal={setTotal} />,
     },
     {
       path: "page4",
-      element: <Pag4 />,
+      element: <Pag4 setTotal={setTotal} />,
     },
     {
       path: "page5",
-      element: <Pag5 />,
+      element: <Pag5 setTotal={setTotal} />,
     },
     {
       path: "page6",
-      element: <Pag6 />,
+      element: <Pag6 setTotal={setTotal} />,
     },
     {
       path: "page7",
-      element: <Pag7 />,
+      element: <Pag7 setTotal={setTotal} />,
     },
     {
       path: "page8",
-      element: <Pag8 />,
+      element: <Pag8 setTotal={setTotal} />,
     },
     {
       path: "page9",
-      element: <Pag9 />,
+      element: <Pag9 setTotal={setTotal} />,
     },
     {
       path: "page10",
-      element: <Pag10 />,
+      element: <Pag10 setTotal={setTotal} />,
     },
     {
       path: "page11",
-      element: <Pag11 />,
+      element: <Pag11 setTotal={setTotal} />,
     },
     {
       path: "page12",
-      element: <Pag12 />,
+      element: <Pag12 setTotal={setTotal} />,
     },
     {
       path: "page13",
-      element: <Pag13 />,
+      element: <Pag13 setTotal={setTotal} />,
     },
   ];
 
