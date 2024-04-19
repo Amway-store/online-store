@@ -174,4 +174,15 @@ const Discount = styled("div")`
 
   font-size: 12px;
   color: white;
+
+  @media (max-width: 800px) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 9px;
+  }
 `;

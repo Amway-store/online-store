@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectItems, selectTotalPrice } from "../../../store/Catalog.slice";
+import { selectTotalPrice } from "../../../store/Catalog.slice";
 
 export const Order = () => {
-  const product = useSelector(selectItems);
-
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     console.log(cartItems);
@@ -171,12 +169,6 @@ const Block = styled("form")`
   @media (max-width: 940px) {
     padding-right: 0;
   }
-`;
-
-const Block2 = styled("div")`
-  display: flex;
-  gap: 2rem;
-  margin-top: 2rem;
 `;
 
 const Cart = styled("div")`
