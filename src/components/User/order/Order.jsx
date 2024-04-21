@@ -66,7 +66,7 @@ export const Order = () => {
           value={formData.name}
           onChange={handleChange}
         />
-        <p>Контактный телефон</p>
+        <p>Контактный телефон:</p>
         <input
           type="text"
           name="tel"
