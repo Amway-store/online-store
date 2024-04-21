@@ -16,7 +16,7 @@ export const Order = () => {
     tel: "",
     address: "",
     total: "",
-    email: "",
+    email: "olegova20@yandex.ru",
   });
 
   const handleChange = (e) => {
@@ -36,7 +36,13 @@ export const Order = () => {
       },
     });
     form.reset();
-    setFormData({ name: "", email: "", tel: "", address: "", total: "" });
+    setFormData({
+      name: "",
+      email: "",
+      tel: "",
+      address: "",
+      total: "",
+    });
     alert("Сообщение отправлено!");
     localStorage.removeItem("cartItems");
     window.location.reload();
@@ -74,8 +80,6 @@ export const Order = () => {
           onChange={handleChange}
         />
 
-        <p>Ваш email</p>
-        <input name="email" value={formData.email} onChange={handleChange} />
         <p style={{ marginTop: "2rem" }}>Итоговое сумма с доставкой</p>
         <p style={{ fontSize: "20px", fontWeight: "800" }}>{total + 350} руб</p>
         <br />
