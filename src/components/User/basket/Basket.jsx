@@ -9,6 +9,7 @@ export const Basket = ({ setTotal }) => {
   const product = useSelector(selectItems);
 
   const [deleteItem, setDeleteItem] = useState(product);
+  console.log("deleteItem: ", deleteItem);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -25,13 +26,16 @@ export const Basket = ({ setTotal }) => {
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     setDeleteItem(updatedCartItems);
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setTotal(cartItems.length > 0 ? cartItems.length - 1 : 0);
+    // setTotal(cartItems.length > 0 ? cartItems.length - 1 : 0);
+    setTotal(cartItems.length);
   };
 
-  const total = deleteItem.reduce(
-    (acc, curr) => acc + parseFloat(curr.price),
-    0
-  );
+  const total = deleteItem.reduce((acc, curr) => {
+    const priceWithDiscount = curr.discount
+      ? curr.price * (1 - curr.discount / 100)
+      : curr.price;
+    return acc + parseFloat(priceWithDiscount);
+  }, 0);
 
   const [showComponent2, setShowComponent2] = useState(false);
 
@@ -42,7 +46,7 @@ export const Basket = ({ setTotal }) => {
   return (
     <div>
       {showComponent2 ? (
-        <Order total={total} onDelete={onDelete} />
+        <Order total={total} onDelete={onDelete} cartItems={deleteItem} />
       ) : (
         <Container>
           {deleteItem.length === 0 ? (
@@ -57,7 +61,9 @@ export const Basket = ({ setTotal }) => {
                     <div>
                       <Title>{el.title}</Title>
                       <p>{el.description}</p>
-                      <p style={{ color: "black" }}>{el.price} рубль</p>
+                      <p style={{ color: "black" }}>
+                        {(el.price * (1 - el.discount / 100)).toFixed(2)} рубль
+                      </p>
                     </div>
                     <MdOutlineClose
                       className="closeIcon"
@@ -71,7 +77,7 @@ export const Basket = ({ setTotal }) => {
               </div>
 
               <Block>
-                <h3>Итого к оплате: {total} руб</h3>
+                <h3> к оплате: {total} руб</h3>
                 <button onClick={goToComponent2}>Оформить заказ</button>
               </Block>
             </ContainerChilde>

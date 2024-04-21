@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { selectTotalPrice } from "../../../store/Catalog.slice";
 
-export const Order = () => {
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    console.log(cartItems);
-  }, []);
+export const Order = ({ total, cartItems }) => {
+  const deliveryCost = 350;
 
-  const totalCount = useSelector(selectTotalPrice);
+  const totalPrice = cartItems.reduce((acc, curr) => {
+    const priceWithDiscount = curr.discount
+      ? curr.price * (1 - curr.discount / 100)
+      : curr.price;
+    return acc + parseFloat(priceWithDiscount);
+  }, 0);
 
   const [formData, setFormData] = useState({
     name: "",
     tel: "",
     address: "",
-    total: "",
     email: "olegova20@yandex.ru",
   });
 
@@ -41,19 +40,11 @@ export const Order = () => {
       email: "",
       tel: "",
       address: "",
-      total: "",
     });
     alert("Сообщение отправлено!");
     localStorage.removeItem("cartItems");
     window.location.reload();
   };
-
-  const [total, setTotal] = useState(totalCount);
-
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setTotal(cartItems.reduce((acc, curr) => acc + parseFloat(curr.price), 0));
-  }, []);
 
   return (
     <Container>
@@ -66,7 +57,7 @@ export const Order = () => {
           value={formData.name}
           onChange={handleChange}
         />
-        <p>Контактный телефон:</p>
+        <p>Контактный телефон</p>
         <input
           type="text"
           name="tel"
@@ -80,13 +71,20 @@ export const Order = () => {
           onChange={handleChange}
         />
 
-        <p style={{ marginTop: "2rem" }}>Итоговое сумма с доставкой</p>
-        <p style={{ fontSize: "20px", fontWeight: "800" }}>{total + 350} руб</p>
-        <br />
-        <br />
+        <p style={{ marginTop: "2rem" }}>Итоговая сумма с доставкой</p>
+        <p style={{ fontSize: "20px", fontWeight: "800" }}>
+          {totalPrice > 2000 ? (
+            <>
+              <div>{totalPrice} руб</div>
+            </>
+          ) : (
+            <>{totalPrice + deliveryCost} руб</>
+          )}
+        </p>
         <br />
 
-        <p>Способ оплаты</p>
+        <p>Способ оплаты:</p>
+        <p>Оплата Курьеру</p>
         <h3>Наличными или переводом на карту курьера</h3>
 
         <button type="submit">Подтвердить заказ</button>
@@ -99,10 +97,10 @@ export const Order = () => {
 
         <Cart>
           <p>Стоимость доставки</p>
-          <p>350 руб</p>
+          <p>{totalPrice > 2000 ? "Бесплатно" : `${deliveryCost} руб`}</p>
         </Cart>
 
-        <p>Итого: {total + 350} руб</p>
+        <p>Итого: {totalPrice + (totalPrice < 2000 ? deliveryCost : 0)} руб</p>
       </div>
     </Container>
   );
