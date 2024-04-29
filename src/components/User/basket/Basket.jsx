@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { MdOutlineClose } from "react-icons/md";
 import { selectItems } from "../../../store/Catalog.slice";
 import { Order } from "../order/Order";
+import { MdDeleteOutline } from "react-icons/md";
 
 export const Basket = ({ setTotal }) => {
   const product = useSelector(selectItems);
@@ -26,7 +27,6 @@ export const Basket = ({ setTotal }) => {
     localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
     setDeleteItem(updatedCartItems);
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    // setTotal(cartItems.length > 0 ? cartItems.length - 1 : 0);
     setTotal(cartItems.length);
   };
 
@@ -58,6 +58,7 @@ export const Basket = ({ setTotal }) => {
                 {deleteItem.map((el) => (
                   <Cart key={el.id}>
                     <img src={el.imageUrl} alt="img" />
+
                     <div>
                       <Title>{el.title}</Title>
                       <p>{el.description}</p>
@@ -65,7 +66,13 @@ export const Basket = ({ setTotal }) => {
                         {(el.price * (1 - el.discount / 100)).toFixed(2)} рубль
                       </p>
                     </div>
-                    <MdOutlineClose
+
+                    <MdDeleteOutlineStyle
+                      size={30}
+                      cursor="pointer"
+                      onClick={() => onDelete(el.id)}
+                    />
+                    <MdOutlineCloseStyle
                       className="closeIcon"
                       size={25}
                       color="#014572"
@@ -120,7 +127,6 @@ const ContainerChilde = styled("div")`
 
 const Cart = styled.div`
   display: flex;
-  gap: 2rem;
   margin-top: 3rem;
 
   img {
@@ -169,10 +175,6 @@ const Cart = styled.div`
         cursor: pointer;
       }
     }
-
-    .closeIcon {
-      display: none;
-    }
   }
 `;
 
@@ -213,5 +215,17 @@ const Block = styled("div")`
     button {
       padding: 0.5rem 1rem 0.5rem 1rem;
     }
+  }
+`;
+
+const MdDeleteOutlineStyle = styled(MdDeleteOutline)`
+  @media (min-width: 541px) {
+    display: none;
+  }
+`;
+
+const MdOutlineCloseStyle = styled(MdOutlineClose)`
+  @media (max-width: 540px) {
+    display: none;
   }
 `;

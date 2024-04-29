@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 export const Order = ({ total, cartItems }) => {
@@ -109,7 +109,6 @@ export const Order = ({ total, cartItems }) => {
 const Container = styled.div`
   display: flex;
   gap: 5rem;
-  background-color: #d1e9fe;
   height: 100%;
   padding: 2rem;
 
@@ -122,6 +121,7 @@ const Container = styled.div`
     height: 5vh;
     border-radius: 10px;
     border: none;
+    border: 1px solid black;
   }
 
   button {
@@ -161,6 +161,14 @@ const Container = styled.div`
       height: 5vh;
       font-size: 10px;
     }
+
+    input {
+      width: 30vw;
+    }
+  }
+
+  @media (max-width: 350px) {
+    padding: 1rem;
   }
 `;
 
@@ -170,6 +178,36 @@ const Block = styled("form")`
 
   @media (max-width: 940px) {
     padding-right: 0;
+  }
+
+  @media (max-width: 555px) {
+    h1 {
+      font-size: 15px;
+    }
+
+    p {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 555px) {
+    h3 {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 330px) {
+    h1 {
+      font-size: 10px;
+    }
+
+    p {
+      font-size: 9px;
+    }
+
+    h3 {
+      font-size: 8px;
+    }
   }
 `;
 
@@ -188,9 +226,23 @@ const Cart = styled("div")`
     padding-right: 0;
   }
 
-  @media (max-width: 470px) {
+  @media (max-width: 555px) {
     p {
-      font-size: 18px;
+      width: 100%;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 330px) {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+  }
+
+  @media (max-width: 330px) {
+    p {
+      width: 7rem;
+      font-size: 10px;
     }
   }
 `;
