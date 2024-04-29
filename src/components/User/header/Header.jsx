@@ -90,7 +90,7 @@ export const Header = ({ total, setTotal }) => {
           </Link>
           <div>
             <BasketCount to="basket">
-              <SlBasket size={30} color="white" cursor="pointer" />
+              <SlBasket size={31} color="white" cursor="pointer" />
               <p>{total}</p>
             </BasketCount>
           </div>
