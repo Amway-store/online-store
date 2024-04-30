@@ -6,12 +6,18 @@ import { IoIosAdd } from "react-icons/io";
 
 export const Product = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [filter, setFilter] = useState("all");
+
   return (
     <Container>
-      <AdminHeader />
+      <AdminHeader filter={filter} setFilter={setFilter} />
 
       <div>
-        <AddProduct openModal={openModal} setOpenModal={setOpenModal} />
+        <AddProduct
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          filter={filter}
+        />
       </div>
       <div
         style={{

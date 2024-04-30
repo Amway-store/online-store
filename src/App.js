@@ -103,7 +103,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="adminPage" element={<Product />} />
+      <Route path="admin-page" element={<Product />} />
       <Route path="/" element={<Layout total={total} setTotal={setTotal} />}>
         <Route index element={<HomePage total={total} />} />
         {router.map((item, id) => (
