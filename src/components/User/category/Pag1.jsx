@@ -91,7 +91,6 @@ const Container = styled.div`
   padding: 1rem;
   padding-left: 3rem;
   padding-top: 1rem;
-
   background-color: #d1e9fe;
   height: 100%;
 

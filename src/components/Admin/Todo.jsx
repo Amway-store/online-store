@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CircularProgress from "@mui/material/CircularProgress";
 
-export const Todo = ({ todo, handleDelete, loading }) => {
+export const Todo = ({ todo, handleDelete, loading, filter }) => {
   return (
     <Container>
       {loading ? (
@@ -11,26 +11,28 @@ export const Todo = ({ todo, handleDelete, loading }) => {
         </Loader>
       ) : (
         <>
-          {todo?.map((el) => (
-            <Cart>
-              <div style={{ position: "relative" }}>
-                <img src={el.imageUrl} alt="Todo" />
-                <div style={{ paddingLeft: "0.5rem" }}>
-                  <Discount>{el.discount} %</Discount>
+          {todo
+            ?.filter((el) => filter === "all" || el.selectedCategory === filter)
+            .map((el) => (
+              <Cart>
+                <div style={{ position: "relative" }}>
+                  <img src={el.imageUrl} alt="Todo" />
+                  <div style={{ paddingLeft: "0.5rem" }}>
+                    <Discount>{el.discount} %</Discount>
+                  </div>
                 </div>
-              </div>
-              <p>{el.title}</p>
-              <p>{el.description}</p>
-              <div>
-                <p style={{ color: "gray", textDecoration: "line-through" }}>
-                  {el.price} руб
-                </p>
-                <p>{(el.price * (1 - el.discount / 100)).toFixed(2)} руб</p>
-              </div>
+                <p>{el.title}</p>
+                <p>{el.description}</p>
+                <div>
+                  <p style={{ color: "gray", textDecoration: "line-through" }}>
+                    {el.price} руб
+                  </p>
+                  <p>{(el.price * (1 - el.discount / 100)).toFixed(2)} руб</p>
+                </div>
 
-              <button onClick={() => handleDelete(el.id)}>Delete</button>
-            </Cart>
-          ))}
+                <button onClick={() => handleDelete(el.id)}>Delete</button>
+              </Cart>
+            ))}
         </>
       )}
     </Container>
@@ -79,6 +81,13 @@ const Cart = styled("div")`
   &:hover button {
     opacity: 1;
   }
+
+  @media (max-width: 500px) {
+    p {
+      font-size: 8px;
+      width: 8rem;
+    }
+  }
 `;
 
 const Loader = styled("div")`
@@ -108,4 +117,21 @@ const Discount = styled("div")`
 
   font-size: 12px;
   color: white;
+
+  @media (max-width: 1110px) {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  @media (max-width: 750px) {
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 8px;
+  }
+
+  @media (max-width: 550px) {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 8px;
+  }
 `;

@@ -10,7 +10,7 @@ import {
 import { db } from "../../../firebase";
 import { Todo } from "../Todo";
 
-export const AddProduct = ({ openModal, setOpenModal }) => {
+export const AddProduct = ({ openModal, setOpenModal, filter }) => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedTodo] = useState(null);
@@ -37,7 +37,12 @@ export const AddProduct = ({ openModal, setOpenModal }) => {
       {openModal && <AddTodo setOpenModal={setOpenModal} todo={selectedTodo} />}
 
       <div>
-        <Todo loading={loading} todo={todos} handleDelete={handleDelete} />
+        <Todo
+          loading={loading}
+          todo={todos}
+          handleDelete={handleDelete}
+          filter={filter}
+        />
       </div>
     </div>
   );

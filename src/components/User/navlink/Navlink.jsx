@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import Menu from "@mui/material/Menu";
 
 export const Navlink = () => {
   const location = useLocation();
   const [selectedPage, setSelectedPage] = useState("");
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const opens = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return location.pathname !== "/basket" ? (
     <div>
@@ -47,23 +55,19 @@ export const Navlink = () => {
           >
             Средства по уходу за детьми
           </LinkStyle>
-          <span
-            onMouseEnter={() => setIsModalVisible(true)}
-            onMouseLeave={() => setIsModalVisible(false)}
-          >
-            Еще
-          </span>
+          <span onClick={handleClick}>Еще</span>
 
-          {isModalVisible && (
-            <div
-              onMouseEnter={() => setIsModalVisible(true)}
-              onMouseLeave={() => setIsModalVisible(false)}
-              style={{
-                display: "flex",
-                justifyContent: "end",
+          <div>
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={opens}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
               }}
             >
-              <ModalMore>
+              <div className="flex flex-col gap-2 p-2">
                 <LinkStyle
                   to="page6"
                   onClick={() => setSelectedPage("page6")}
@@ -121,9 +125,9 @@ export const Navlink = () => {
                 >
                   Косметика
                 </LinkStyle>
-              </ModalMore>
-            </div>
-          )}
+              </div>
+            </Menu>
+          </div>
         </div>
 
         <select onChange={(e) => (window.location.href = e.target.value)}>
@@ -208,19 +212,4 @@ const LinkStyle = styled(Link)`
   &:hover {
     color: red;
   }
-`;
-
-const ModalMore = styled("div")`
-  position: absolute;
-  margin-top: 39rem;
-
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  width: 10rem;
-  height: 38rem;
-  background-color: #00ffff;
-  z-index: 9999;
-  border-radius: 10px 0px 10px 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 `;

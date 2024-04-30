@@ -91,7 +91,6 @@ const Container = styled.div`
   padding-left: 3rem;
   padding-top: 1rem;
 
-  /* background-color: #d1e9fe; */
   height: 100%;
 
   @media (max-width: 910px) {

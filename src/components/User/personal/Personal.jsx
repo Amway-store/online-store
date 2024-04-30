@@ -12,7 +12,7 @@ export const Personal = () => {
     e.preventDefault();
 
     if (value === "admin@gmail.com" && value2 === "admin") {
-      window.location.href = "/adminPage";
+      window.location.href = "/admin-page";
     } else if (value && value2) {
       window.location.href = "/";
     } else {
