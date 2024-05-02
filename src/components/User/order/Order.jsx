@@ -26,7 +26,7 @@ export const Order = ({ total, cartItems }) => {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
-    const url = "https://formspree.io/f/mrgnqovn";
+    const url = "https://formspree.io/f/mjvnlegp";
     await fetch(url, {
       method: "POST",
       body: data,
