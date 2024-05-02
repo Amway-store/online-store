@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectItems } from "../../../store/Catalog.slice";
 
 export const Order = ({ total, cartItems }) => {
   const deliveryCost = 350;
+
+  const product = useSelector(selectItems);
 
   const totalPrice = cartItems.reduce((acc, curr) => {
     const priceWithDiscount = curr.discount
@@ -15,7 +19,7 @@ export const Order = ({ total, cartItems }) => {
     name: "",
     tel: "",
     address: "",
-    email: "olegova20@yandex.ru",
+    email: "",
   });
 
   const handleChange = (e) => {
@@ -26,7 +30,8 @@ export const Order = ({ total, cartItems }) => {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
-    const url = "https://formspree.io/f/mjvnlegp";
+    data.append("products", JSON.stringify(product));
+    const url = "https://formspree.io/f/xbjnwaga";
     await fetch(url, {
       method: "POST",
       body: data,
@@ -70,6 +75,22 @@ export const Order = ({ total, cartItems }) => {
           value={formData.address}
           onChange={handleChange}
         />
+        <div style={{ marginTop: "2rem", borderBottom: "1px solid black" }}>
+          <h2>Ваш заказ</h2>
+          {product.map((el) => (
+            <div key={el.id}>
+              <img src={el.imageUrl} alt="img" />
+
+              <div>
+                <p>{el.title}</p>
+                <p>{el.description}</p>
+                <p style={{ color: "black" }}>
+                  {(el.price * (1 - el.discount / 100)).toFixed(2)} рубль
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <p style={{ marginTop: "2rem" }}>Итоговая сумма с доставкой</p>
         <p style={{ fontSize: "20px", fontWeight: "800" }}>
