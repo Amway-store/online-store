@@ -19,7 +19,7 @@ export const Order = ({ total, cartItems }) => {
     name: "",
     tel: "",
     address: "",
-    email: "",
+    email: "olegova20@yandex.ru",
   });
 
   const handleChange = (e) => {
