@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { selectItems } from "../../../store/Catalog.slice";
 
 export const Order = ({ total, cartItems }) => {
   const deliveryCost = 350;
+  const product = useSelector(selectItems);
 
   const totalPrice = cartItems.reduce((acc, curr) => {
     const priceWithDiscount = curr.discount
@@ -26,6 +29,12 @@ export const Order = ({ total, cartItems }) => {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
+
+    const productData = product?.map((el) => ({
+      title: el.description,
+      price: el.price,
+    }));
+    data.append("products", JSON.stringify(productData));
 
     const url = "https://formspree.io/f/xyyrodrl";
     await fetch(url, {
