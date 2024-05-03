@@ -54,7 +54,7 @@ export const Basket = ({ setTotal }) => {
           ) : (
             <ContainerChilde>
               <div>
-                <h2>Корзина</h2>
+                <h2>Корзинаsd</h2>
                 {deleteItem.map((el) => (
                   <Cart key={el.id}>
                     <img src={el.imageUrl} alt="img" />
