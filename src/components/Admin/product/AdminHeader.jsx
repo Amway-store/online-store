@@ -95,6 +95,18 @@ export const AdminHeader = ({ setFilter }) => {
       </Menu>
 
       <Link
+        to="/order"
+        style={{
+          color: "white",
+          textDecoration: "none",
+          cursor: "pointer",
+          fontSize: "30px",
+          fontWeight: "800",
+        }}
+      >
+        <p>Заказы</p>
+      </Link>
+      <Link
         to="/"
         style={{
           color: "white",
