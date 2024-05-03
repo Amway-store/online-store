@@ -19,7 +19,7 @@ export const Order = ({ total, cartItems }) => {
     name: "",
     tel: "",
     address: "",
-    email: "amway365.store@gmail.com",
+    email: "ulukbekkasymbekov25@gmail.com",
   });
 
   const handleChange = (e) => {
@@ -36,7 +36,7 @@ export const Order = ({ total, cartItems }) => {
       price: el.price,
     }));
     data.append("products", JSON.stringify(productData));
-    const url = "https://formspree.io/f/xyyrodrl";
+    const url = "https://formspree.io/f/mjvnlegp";
     await fetch(url, {
       method: "POST",
       body: data,
