@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { selectItems } from "../../../store/Catalog.slice";
+import emailjs from "emailjs-com";
 
 export const Order = ({ total, cartItems }) => {
   const deliveryCost = 350;
@@ -14,43 +15,21 @@ export const Order = ({ total, cartItems }) => {
     return acc + parseFloat(priceWithDiscount);
   }, 0);
 
-  const [formData, setFormData] = useState({
-    name: "",
-    tel: "",
-    address: "",
-    email: "amway365.store@gmail.com",
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    const data = new FormData(form);
 
-    const productData = product?.map((el) => ({
-      title: el.description,
-      price: el.price,
-    }));
-    data.append("products", JSON.stringify(productData));
+    emailjs
+      .sendForm(
+        "service_q0a78y9",
+        "template_b7nbllb",
+        e.target,
+        "-max2LpLG2rH-A3o7"
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
 
-    const url = "https://formspree.io/f/xyyrodrl";
-    await fetch(url, {
-      method: "POST",
-      body: data,
-      headers: {
-        Accept: "application/json",
-      },
-    });
-    form.reset();
-    setFormData({
-      name: "",
-      email: "",
-      tel: "",
-      address: "",
-    });
     alert("Сообщение отправлено!");
     localStorage.removeItem("cartItems");
     window.location.reload();
@@ -61,24 +40,26 @@ export const Order = ({ total, cartItems }) => {
       <Block onSubmit={handleSubmit}>
         <h1>Оформление заказа</h1>
         <p>Контактное лицо (ФИО)</p>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
+        <input type="text" name="name" />
         <p>Контактный телефон</p>
-        <input
-          type="text"
-          name="tel"
-          value={formData.tel}
-          onChange={handleChange}
-        />
+        <input type="text" name="number" />
         <p>Адрес</p>
+        <input type="text" name="adress" />
+
+        <textarea
+          style={{ display: "none" }}
+          name="message"
+          rows={4}
+          value={product
+            .map((el) => `${el.description}, ${el.price} рублей`)
+            .join("\n")}
+        ></textarea>
+
         <input
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
+          style={{ display: "none" }}
+          type="text"
+          name="total"
+          value={total}
         />
 
         <p style={{ marginTop: "2rem" }}>Итоговая сумма с доставкой</p>
@@ -97,7 +78,7 @@ export const Order = ({ total, cartItems }) => {
         <p>Оплата Курьеру</p>
         <h3>Наличными или переводом на карту курьера</h3>
 
-        <button type="submit">Подтвердить заказ</button>
+        <input type="submit" value="Подтвердить заказ" />
       </Block>
       <div>
         <Cart>
