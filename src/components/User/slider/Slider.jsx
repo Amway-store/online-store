@@ -11,8 +11,6 @@ export const Slider = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log(todos);
-
   useEffect(() => {
     const q = query(collection(db, "todos"));
     const unsub = onSnapshot(q, (querySnapshot) => {

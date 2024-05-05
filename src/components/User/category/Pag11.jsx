@@ -145,6 +145,24 @@ const Cart = styled.div`
       font-size: 10px;
     }
   }
+
+  @media (max-width: 450px) {
+    button {
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 350px) {
+    button {
+      font-size: 10px;
+    }
+  }
+
+  @media (max-width: 300px) {
+    button {
+      font-size: 7px;
+    }
+  }
 `;
 
 const Loader = styled("div")`

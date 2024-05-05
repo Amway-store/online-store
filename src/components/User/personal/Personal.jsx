@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Personal.css";
 import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa6";
 
 export const Personal = () => {
   const [value, setValue] = useState("");
@@ -23,7 +24,13 @@ export const Personal = () => {
   return (
     <div>
       <Header>
-        <LinkStyle to="/">Главная страница</LinkStyle>
+        <LinkStyle
+          to="/"
+          style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+        >
+          <FaArrowLeft />
+          <div>Назад</div>
+        </LinkStyle>
       </Header>
       <Nav>
         <div

@@ -10,7 +10,6 @@ export const Basket = ({ setTotal }) => {
   const product = useSelector(selectItems);
 
   const [deleteItem, setDeleteItem] = useState(product);
-  console.log("deleteItem: ", deleteItem);
 
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
