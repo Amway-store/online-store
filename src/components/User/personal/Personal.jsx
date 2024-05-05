@@ -11,7 +11,7 @@ export const Personal = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (value === "olegova@gmail.com" && value2 === "olegova365") {
+    if (value === "olegova@yandex.ru" && value2 === "olegova365") {
       window.location.href = "/admin-page-365";
     } else if (value && value2) {
       window.location.href = "/";
