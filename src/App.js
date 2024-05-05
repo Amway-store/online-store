@@ -26,9 +26,7 @@ import { selectTotalCount } from "./store/Catalog.slice";
 
 function App() {
   const totalCount = useSelector(selectTotalCount);
-  console.log("totalCount: ", totalCount);
   const [total, setTotal] = useState(totalCount);
-  console.log("total: ", total);
 
   const router = [
     {
@@ -103,7 +101,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="admin-page" element={<Product />} />
+      <Route path="admin-page-365" element={<Product />} />
       <Route path="/" element={<Layout total={total} setTotal={setTotal} />}>
         <Route index element={<HomePage total={total} />} />
         {router.map((item, id) => (
